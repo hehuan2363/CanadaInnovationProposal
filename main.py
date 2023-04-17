@@ -4,39 +4,13 @@ from streamlit_chat import message
 
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain import OpenAI, VectorDBQA
-
+from langchain.vectorstores import Pinecone
 import os
 import pinecone
 
 OPENAI_API_KEY =os.environ['OPENAI_API_KEY']
 PINECONE_API_KEY =os.environ['PINECONE_API_KEY']
 PINE_ENV = os.environ['PINE_ENV']
-
-model_name = 'text-embedding-ada-002'
-
-embed = OpenAIEmbeddings(
-    document_model_name=model_name,
-    query_model_name=model_name,
-    openai_api_key=OPENAI_API_KEY
-)
-
-index_name = 'testcanadapolicy'
-pinecone.init(
-    api_key=PINECONE_API_KEY,
-    environment=PINE_ENV
-)
-
-from langchain.vectorstores import Pinecone
-
-text_field = "text"
-
-# switch back to normal index for langchain
-index = pinecone.Index(index_name)
-
-vectorstore = Pinecone(
-    index, embed.embed_query, text_field
-)
-
 
 
 
@@ -45,6 +19,31 @@ def load_chain():
     """Logic for loading the chain you want to use should go here."""
     # llm = OpenAI(temperature=0)
     # chain = ConversationChain(llm=llm)
+    
+    model_name = 'text-embedding-ada-002'
+
+    embed = OpenAIEmbeddings(
+        document_model_name=model_name,
+        query_model_name=model_name,
+        openai_api_key=OPENAI_API_KEY
+    )
+
+    index_name = 'testcanadapolicy'
+    pinecone.init(
+        api_key=PINECONE_API_KEY,
+        environment=PINE_ENV
+    )
+
+
+    text_field = "text"
+
+    # switch back to normal index for langchain
+    index = pinecone.Index(index_name)
+
+    vectorstore = Pinecone(
+        index, embed.embed_query, text_field
+    )
+
     llm = OpenAI(
     openai_api_key=OPENAI_API_KEY,
     model_name='gpt-3.5-turbo',
