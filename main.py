@@ -60,8 +60,8 @@ def load_chain():
 chain = load_chain()
 
 # From here down is all the StreamLit UI.
-st.set_page_config(page_title="Ask for Canadian Policy", page_icon=":robot:")
-st.header("Ask for Canadian Policy")
+st.set_page_config(page_title="Ask for Canadian Policy - Innovative Solutions Canada", page_icon=":robot:")
+st.header("Ask for RFP Canadian Policy- Innovative Solutions Canada")
 
 if "generated" not in st.session_state:
     st.session_state["generated"] = []
