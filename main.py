@@ -78,7 +78,7 @@ def get_text():
 user_input = get_text()
 
 if user_input:
-    st.write(f"input dictionary: {{"query": user_input}}")
+    st.write(f"input dictionary: {{'query': {user_input}}}")
     output = chain.run(inputs={"query": user_input})
 
     st.session_state.past.append(user_input)
