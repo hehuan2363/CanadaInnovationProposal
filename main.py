@@ -6,6 +6,7 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain import OpenAI, VectorDBQA
 
 import os
+import pinecone
 
 OPENAI_API_KEY =os.environ['OPENAI_API_KEY']
 PINECONE_API_KEY =os.environ['PINECONE_API_KEY']
@@ -17,6 +18,12 @@ embed = OpenAIEmbeddings(
     document_model_name=model_name,
     query_model_name=model_name,
     openai_api_key=OPENAI_API_KEY
+)
+
+index_name = 'testcanadapolicy'
+pinecone.init(
+    api_key=PINECONE_API_KEY,
+    environment=PINE_ENV
 )
 
 from langchain.vectorstores import Pinecone
