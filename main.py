@@ -23,8 +23,6 @@ def load_chain():
     model_name = 'text-embedding-ada-002'
 
     embed = OpenAIEmbeddings(
-        document_model_name=model_name,
-        query_model_name=model_name,
         openai_api_key=OPENAI_API_KEY
     )
 
